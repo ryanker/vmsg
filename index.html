@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>vmsg demo</title>
+</head>
+<body>
+
+<div>
+    <button id="btn_start">Start</button>
+    <button id="btn_stop">Stop</button>
+</div>
+
+<script src="dist/vmsg.min.js"></script>
+<script>
+    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    document.addEventListener('DOMContentLoaded', function () {
+        let record = new vmsg.Recorder({wasmURL: "./vmsg.wasm"})
+        document.querySelector('#btn_start').addEventListener('click', function () {
+            console.log('startRecording')
+            record.init().then(() => {
+                record.startRecording()
+            }).catch(err => {
+                console.log(err)
+            })
+        })
+        document.querySelector('#btn_stop').addEventListener('click', function () {
+            console.log('stopRecording')
+            record.stopRecording().then(blob => {
+                console.log(blob.size)
+                console.log(blob.type)
+                console.log('==============================')
+
+                let a = document.createElement('audio')
+                a.controls = true
+                a.src = URL.createObjectURL(blob)
+                if (!isSafari) a.play();
+                document.body.append(a)
+            }).catch(err => {
+                console.log(err)
+            })
+        })
+    })
+</script>
+</body>
+</html>
