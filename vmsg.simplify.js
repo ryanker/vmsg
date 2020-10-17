@@ -287,7 +287,7 @@ export class Recorder {
         if (!this.worker) throw new Error("missing worker initialization");
         this.encNode.disconnect();
         this.encNode.onaudioprocess = null;
-        this.stopTracks();
+        // this.stopTracks();
         this.audioCtx.close();
         this.worker.postMessage({type: "stop", data: null});
         return new Promise((resolve, reject) => {
