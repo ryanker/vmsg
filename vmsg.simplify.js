@@ -143,7 +143,7 @@ function inlineWorker() {
     };
 }
 
-export class Recorder {
+export default class Recorder {
     constructor(opts = {}, onStop = null) {
         // Can't use relative URL in blob worker, see:
         // https://stackoverflow.com/a/22582695
@@ -304,11 +304,6 @@ export class Recorder {
         }
     }
 }
-
-/**
- * All available public items.
- */
-export default { Recorder };
 
 // Borrowed from and slightly modified:
 // https://github.com/cwilso/Audio-Input-Effects/blob/master/js/jungle.js

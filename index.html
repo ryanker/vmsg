@@ -13,9 +13,10 @@
 
 <script src="dist/vmsg.min.js"></script>
 <script>
-    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+    console.log(mp3Recorder)
     document.addEventListener('DOMContentLoaded', function () {
-        let record = new vmsg.Recorder({wasmURL: "./vmsg.wasm"})
+        let record = new mp3Recorder({wasmURL: "./vmsg.wasm"})
         document.querySelector('#btn_start').addEventListener('click', function () {
             console.log('startRecording')
             record.init().then(() => {
@@ -34,7 +35,7 @@
                 let a = document.createElement('audio')
                 a.controls = true
                 a.src = URL.createObjectURL(blob)
-                if (!isSafari) a.play();
+                if (!isSafari) a.play()
                 document.body.append(a)
             }).catch(err => {
                 console.log(err)
